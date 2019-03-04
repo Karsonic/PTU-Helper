@@ -1,0 +1,12 @@
+{
+    "locations": [
+        {
+            "name": "Party",
+            "xp_multiplier": 1
+        },
+        {
+            "name": "Daycare",
+            "xp_multiplier": 0.5
+        }
+    ]
+}
