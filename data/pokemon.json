@@ -1,0 +1,7 @@
+{
+    "pokemons": [
+        {"name": "Mini Me", "xp": 2050, "location": "Party"},
+        {"name": "Double Stuff", "xp": 5000, "location": "Party"},
+        {"name": "Sandshrew", "xp": 1000, "location": "Daycare"}
+    ]
+}
