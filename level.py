@@ -1,6 +1,28 @@
 import json
 from typing import Dict
 
+def _load_levels(filepath: str = "data/levels.json") -> Dict[int, int]:
+        """Loads the levels json file into a dict
+        
+        Arguments:
+            filepath {[str]} -- The filpath of the .json file  
+
+        Returns:
+            Dict[int, Level] -- A dict of [level number, min xp for level]
+        """
+        with open(filepath) as file:
+            content = json.load(file)
+
+        result = {}
+        levels = content["levels"]
+
+        for level in levels:
+            level_num = int(level)
+            level_xp = levels[level]
+            result[level_num] = level_xp
+
+        return result
+
 class Level:
     """A class for dealing with levels and leveling up"""
     _level_lookup = _load_levels()
@@ -32,7 +54,7 @@ class Level:
         """
         self.xp += xp
 
-        if self.xp >= self.get_next_level_xp:
+        if self.xp >= self.get_next_level_xp():
             self.number += 1
             return True
 
@@ -49,26 +71,3 @@ class Level:
             int -- The level number of something with the provided amount of xp
         """
         return next((level for level in Level._level_lookup if Level._level_lookup[level] > xp))
-
-    @staticmethod
-    def _load_levels(filepath: str = "data/levels.json") -> Dict[int, int]:
-        """Loads the levels json file into a dict
-        
-        Arguments:
-            filepath {[str]} -- The filpath of the .json file  
-
-        Returns:
-            Dict[int, Level] -- A dict of [level number, min xp for level]
-        """
-        with open(filepath) as file:
-            content = json.load(file)
-
-        result = {}
-        levels = content["levels"]
-
-        for level in levels:
-            level_num = int(level)
-            level_xp = levels[level]
-            result[level_num] = level_xp
-
-        return result
