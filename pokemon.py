@@ -38,6 +38,20 @@ class Pokemon:
 
         return result
 
+    @staticmethod
+    def save_pokemon(pokemons: List['Pokemon'], filepath: str = 'data/pokemon.json') -> None:        
+        serialized = {"pokemons":[]}
+
+        for pokemon in pokemons:
+            entry = {}
+            entry['name'] = pokemon.name
+            entry['location'] = pokemon.location.name
+            entry['xp'] = pokemon.level.xp
+            serialized["pokemons"].append(entry)
+
+        with open(filepath, 'w') as f:
+            json.dump(f, serialized)
+
     def __repr__(self):
-        return f'A level {self.level} pokemon named "{self.name}" ' + \
-               f'with ({self.level.xp} / {self.level.get_next_level_xp}) experience points'
+        return f'A level {self.level.number} pokemon named "{self.name}" ' + \
+               f'with ({self.level.xp} / {self.level.get_next_level_xp()}) experience points'
