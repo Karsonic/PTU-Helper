@@ -29,12 +29,19 @@ class Location:
     _location_xp_mults = _load_xp_mult()
     _known_locations = {}
 
-    def __init__(self, name: str, xp_mult: int = 1):
+    def __init__(self, name: str, xp_mult: float = 1.0):
         self.name = name
         self.xp_mult = xp_mult
 
     @staticmethod
-    def get_from_name(name: str):
+    def add_new_location(name: str, xp_mult: float) -> 'Location':
+        name = name.lower()
+        location = Location(name, xp_mult)
+        Location._known_locations[name] = location
+        return location
+
+    @staticmethod
+    def get_from_name(name: str) -> 'Location':
         name = name.lower()
 
         if name not in Location._known_locations:
