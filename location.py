@@ -49,3 +49,17 @@ class Location:
             Location._known_locations[name] = Location(name, xp_mult)
         
         return Location._known_locations[name]
+
+    @staticmethod
+    def save(filepath: str = 'data/locations.json') -> None:
+        serialized = {"locations":[]}
+
+        for name in Location._known_locations:
+            entry = {}
+            location = Location._known_locations[name]
+            entry['name'] = location.name
+            entry['xp_multiplier'] = location.xp_mult
+            serialized["locations"].append(entry)
+
+        with open(filepath, 'w') as f:
+            json.dump(serialized, f)

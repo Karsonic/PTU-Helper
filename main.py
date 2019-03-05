@@ -70,7 +70,7 @@ def p_create_pokemon(pokemons: List[Pokemon]) -> None:
         print('Failed to create pokemon')
         return
     
-    if _confirm(f'Will create {name}, with {xp} xp, located in {location}'):
+    if _confirm(f'Will create {name}, with {xp} xp, located in {location.name}'):
         pokemon = Pokemon(name, location, level)
         pokemons.append(pokemon)
         print(f'Created {pokemon}')
@@ -108,6 +108,7 @@ def p_quit(pokemons: List[Pokemon]) -> None:
     print('Saving...')
     try:
         Pokemon.save_pokemon(pokemons, pk_json_file)
+        Location.save()
     except Exception as ex:
         print(f'Failed to save: {ex}')
     finally:
