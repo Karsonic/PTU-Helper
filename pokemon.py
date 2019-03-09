@@ -12,13 +12,13 @@ class Pokemon:
         self.location = location
         self.name = name
 
-    def add_xp(self, xp: int) -> bool:
+    def add_xp(self, xp: int) -> int:
         """
         Add a raw experience amount before considering multiplier and returns
         whether or not it caused a level-up.
         
         Returns:
-            bool -- True if this experience caused a level-up, False otherwise
+            int -- The number of levels gained, 0 if none are gained
         """
         return self.level.add_xp(floor(xp * self.location.xp_mult))
 

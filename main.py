@@ -55,9 +55,9 @@ def p_add_xp(pokemons: List[Pokemon]) -> None:
         return
 
     for pokemon in pokemons:
-        levelup = pokemon.add_xp(xp)
-        if levelup:
-            print(f'{pokemon.name} leveled up to lvl {pokemon.level.number}')
+        levelup_count = pokemon.add_xp(xp)
+        if levelup_count > 0:
+            print(f'{pokemon.name} leveled up {levelup_count} times to lvl {pokemon.level.number}')
 
 
 def p_create_pokemon(pokemons: List[Pokemon]) -> None:

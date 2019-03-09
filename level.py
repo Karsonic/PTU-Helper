@@ -41,7 +41,7 @@ class Level:
             return 999999 # TODO: Handle better
         return Level._level_lookup[self.number + 1] 
 
-    def add_xp(self, xp: int) -> bool:
+    def add_xp(self, xp: int) -> int:
         """
         Add experience to the Level, and returns whether this caused the level
         to increase
@@ -50,15 +50,16 @@ class Level:
             xp {[int]} -- An amount of experience (after any modifiers)
 
         Returns:
-            bool -- True if this experience caused a level-up, False otherwise
+            int -- The number of levels gained, 0 if none are gained
         """
         self.xp += xp
+        levels_gained = 0
 
-        if self.xp >= self.get_next_level_xp():
+        while self.xp >= self.get_next_level_xp():
             self.number += 1
-            return True
+            levels_gained += 1
 
-        return False
+        return levels_gained
             
     @staticmethod
     def get_level_number(xp: int) -> int:
