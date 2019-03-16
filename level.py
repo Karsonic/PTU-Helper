@@ -71,4 +71,4 @@ class Level:
         Returns:
             int -- The level number of something with the provided amount of xp
         """
-        return next((level for level in Level._level_lookup if Level._level_lookup[level] > xp))
+        return next((level for level in Level._level_lookup if Level._level_lookup[level] > xp)) - 1
